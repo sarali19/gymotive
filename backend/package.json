@@ -1,0 +1,20 @@
+{
+  "name": "express-test",
+  "version": "0.0.1",
+  "description": "a small express test project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node src/app.js"
+  },
+  "author": "eyl",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.13.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prisma": "^4.13.0"
+  }
+}
