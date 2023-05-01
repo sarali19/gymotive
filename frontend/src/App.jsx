@@ -3,6 +3,10 @@ import React from "react";
 import CreateProductForm from "./components/CreateProductForm";
 import {BrowserRouter as Router, Routes,Route} from "react-router-dom"
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Wishlist from "./pages/Wishlist";
+import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
 
 
 function App() {
@@ -11,9 +15,10 @@ function App() {
       <Router>
         <Navbar/>
         <Routes>
-          <Route path= "/" />
-          <Route path= "/cart"/>
-          <Route path= "/wishlist"/>
+          <Route path= "/" element={<Home/>}/>
+          <Route path= "/cart" element={<Cart/>}/>
+          <Route path= "/wishlist" element={<Wishlist/>}/>
+          <Route path= "/profile" element={<Profile/>}/>
         </Routes>
       </Router>
       {/* <Counter /> */}
