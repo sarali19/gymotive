@@ -6,7 +6,7 @@ import { MantineProvider } from "@mantine/core";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider theme={{
-      globalStyles : (theme) => ({
+      globalStyles: (theme) => ({
         "body": {
           margin: 0
         },
@@ -19,6 +19,26 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         ".link:hover": {
           color: "limegreen",
           textDecoration: "none"
+        },
+
+        ".category-button": {
+          color: "white",
+          background: "none",
+          fontSize: 24,
+          textTransform: "uppercase",
+          textDecoration: "none",
+          fontFamily: "consolas"
+        },
+
+        ".category-button:hover": {
+          background: "none",
+          borderRadius: 0,
+          borderBottom: "3px solid white",
+        },
+
+        ".main-footer": {
+          color: "white",
+          background: "black"
         }
       })
     }}>
