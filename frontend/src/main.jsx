@@ -39,7 +39,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         ".main-footer": {
           color: "white",
           background: "black"
-        }
+        },
+
       })
     }}>
       <App />

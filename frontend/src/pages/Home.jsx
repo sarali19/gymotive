@@ -1,23 +1,14 @@
 import React from 'react'
-import { Image } from '@mantine/core'
+import { Button, Image } from '@mantine/core'
+import { Link } from 'react-router-dom'
 // import { Carousel } from '@mantine/carousel';
 
 const Home = () => {
   return (
     <div>
       <Image src="./src/images/adidasbanner.jpg" alt="banner" />
-      {/* <Carousel>
-        <div>
-          <img src="./src/images/heroimage.jpeg" />
-        </div>
-        <div>
-          <img src="/src/images/heroimage.jpeg.jpeg" />
+      <Link to="/products" className='link'>Shop now</Link>
 
-        </div>
-        <div>
-          <img src="/src/images/heroimage.jpeg.jpeg" />
-        </div>
-      </Carousel> */}
     </div>
   )
 }
