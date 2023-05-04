@@ -1,6 +1,6 @@
 import React from "react";
 // import Counter from "./components/Counter";
-// import CreateProductForm from "./components/CreateProductForm";
+import CreateProductForm from "./components/CreateProductForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -21,7 +21,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<CreateProductForm />} />
         </Routes>
         <Footer />
       </Router>

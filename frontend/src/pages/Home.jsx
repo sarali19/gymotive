@@ -1,14 +1,43 @@
 import React from 'react'
-import { Button, Image } from '@mantine/core'
+import { Button, Container, Image, Overlay, Text, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
-// import { Carousel } from '@mantine/carousel';
 
 const Home = () => {
   return (
     <div>
-      <Image src="./src/images/adidasbanner.jpg" alt="banner" />
-      <Link to="/products" className='link'>Shop now</Link>
+      {/* <Image src="./src/images/adidasbanner.jpg" alt="banner" />
+      <Title className='hero-title'>
+        Impossible is nothing.
+      </Title>
+      <Text size="xl" mt="xl" className='hero-text'>
+        Unlock exclusive experiences, drops and discover the new you.
+      </Text>
+      <a href="/products">
+        <Button variant="gradient" size="xl" radius="xl">
+          Shop now
+        </Button>
+      </a> */}
 
+      <header>
+        <div className="hero-text">
+          <div className="hero-image">
+            <Image src="./src/images/adidasbanner.jpg" alt="banner" />
+          </div>
+          <div class='text-on-image'>
+            <Title className='hero-title'>
+              Impossible is nothing.
+            </Title>
+            <Text size="xl" mt="xl" className='hero-text'>
+              Unlock exclusive experiences, drops and discover the new you.
+            </Text>
+            <a href="/products">
+              <Button variant="gradient" size="xl" radius="xl">
+                Shop now
+              </Button>
+            </a>
+          </div>
+        </div>
+      </header>
     </div>
   )
 }

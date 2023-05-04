@@ -41,6 +41,23 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           background: "black"
         },
 
+        ".hero-title": {
+          color: "black",
+          fontWeight: 900,
+          lineHeight: 1.1,
+        },
+        ".hero-text": {
+          color: "black",
+          fontWeight: 900,
+          lineHeight: 1.1,
+        },
+
+        ".text-on-image": {
+          position: "absolute",
+          right: 0.5,
+          left: 0.5,
+          bottom: 15,
+        },
       })
     }}>
       <App />

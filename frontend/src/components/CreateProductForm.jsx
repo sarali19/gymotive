@@ -29,10 +29,10 @@ function CreateProductForm() {
   });
 
   const categoryData = [
-    { value: "men", label: "Men" },
-    { value: "women", label: "Women" },
-    { value: "supplements", label: "Supplements" },
-    { value: "accessories", label: "Accessories" },
+    { value: "Men", label: "Men" },
+    { value: "Women", label: "Women" },
+    { value: "Supplements", label: "Supplements" },
+    { value: "Accessories", label: "Accessories" },
   ];
 
   const brandData = [
