@@ -3,6 +3,7 @@ import { Box, Button, ColorInput, NumberInput, Select, Text, TextInput, Textarea
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import api from "../api/axios";
+import { brandOptions, categoryOptions } from "../constants";
 
 const schema = z.object({
   title: z.string().min(2, { message: "Title should have at least 2 letters" }),
@@ -27,24 +28,6 @@ function CreateProductForm() {
     },
     validate: zodResolver(schema),
   });
-
-  const categoryData = [
-    { value: "Men", label: "Men" },
-    { value: "Women", label: "Women" },
-    { value: "Supplements", label: "Supplements" },
-    { value: "Accessories", label: "Accessories" },
-  ];
-
-  const brandData = [
-    { value: "adidas", label: "adidas" },
-    { value: "nike", label: "nike" },
-    { value: "sbd", label: "sbd" },
-    { value: "reebok", label: "reebok" },
-    { value: "puma", label: "puma" },
-    { value: "dymatize", label: "dymatize" },
-    { value: "mutant", label: "mutant" },
-    { value: "gold standard", label: "gold standard" },
-  ];
 
   const submitProduct = async (values) => {
     setLoading(true);
@@ -79,7 +62,7 @@ function CreateProductForm() {
         />
 
         <Select
-          data={categoryData}
+          data={categoryOptions}
           placeholder="Product category"
           label="Category"
           withAsterisk
@@ -96,7 +79,7 @@ function CreateProductForm() {
         />
 
         <Select
-          data={brandData}
+          data={brandOptions}
           placeholder="Product brand"
           label="Brand"
           withAsterisk

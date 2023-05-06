@@ -19,7 +19,7 @@ function ProductCard({ productData }) {
                 </Badge>}
             </Group>
             <Text size="sm" color="dimmed">
-                {productData.description}
+                {productData.brand}
             </Text>
             <Text size="md" color="black" fw={700}>
                 {productData.price} MAD

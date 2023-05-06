@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Footer from "./components/footer";
 import Products from "./components/Products";
+import SearchBar from "./components/SearchBar";
 
 
 function App() {
@@ -26,7 +27,6 @@ function App() {
         <Footer />
       </Router>
       {/* <Counter /> */}
-      {/* <CreateProductForm /> */}
     </div>
   );
 }
