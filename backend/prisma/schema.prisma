@@ -19,6 +19,7 @@ model Products {
   brand       String?
   price       Float    @default(0)
   onSale      Boolean  @default(false)
+  image       String?
   createdAt   DateTime @default(now())
   clients     Orders[]
 }

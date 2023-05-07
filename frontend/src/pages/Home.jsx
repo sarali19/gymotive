@@ -10,7 +10,7 @@ const Home = () => {
           <div className="hero-image">
             <Image src="./src/images/adidasbanner.jpg" alt="banner" />
           </div>
-          <div class='text-on-image'>
+          <div className='text-on-image'>
             <Title className='hero-title'>
               Impossible is nothing.
             </Title>

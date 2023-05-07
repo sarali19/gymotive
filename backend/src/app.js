@@ -4,7 +4,7 @@ import { ordersRouter } from "./routes/orders";
 
 const app = express();
 
-app.use(json());
+app.use(json({ limit: "5mb" }));
 
 app.use((request, response, next) => {
   // Allowed sources and headers

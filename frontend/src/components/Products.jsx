@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Container, Loader, Center, Text } from '@mantine/core';
+import { Grid, Container, Loader, Center, Text, Select, Group, Box } from '@mantine/core';
 import api from '../api/axios';
 import ProductCard from './ProductCard';
 import { useSearchParams } from 'react-router-dom';
 import ProductsFilter from './ProductsFilter';
+import SortByPrice from './SortByPrice';
 
 
 function Products() {
@@ -31,6 +32,15 @@ function Products() {
 		}
 	}
 
+	const sortProducts = (sortType) => {
+		if (sortType === "asc") {
+			setProducts(products.toSorted((a, b) => a.price - b.price))
+		}
+		else if (sortType === "dsc") {
+			setProducts(products.toSorted((a, b) => b.price - a.price))
+		}
+	}
+
 	useEffect(() => {
 		fetchProducts();
 	}, [searchParams])
@@ -44,7 +54,7 @@ function Products() {
 			<Container fluid>
 				<Grid>
 					<Grid.Col span={3}>
-						<ProductsFilter fetchProducts={fetchProducts} />
+						<ProductsFilter fetch={fetchProducts} />
 					</Grid.Col>
 
 					<Grid.Col span={9}>
@@ -55,7 +65,11 @@ function Products() {
 							:
 							products.length > 0 ?
 								<>
-									<div>TODO: ORDER PRODUCTS </div>
+									<Box sx={{ marginBottom: 18 }}>
+										<Group position='right'>
+											<SortByPrice sort={sortProducts} />
+										</Group>
+									</Box>
 									<Grid>
 										{products.map((item) =>
 											<Grid.Col span={4} key={item.id}>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Box, Button, ColorInput, NumberInput, Select, Text, TextInput, Textarea, Loader } from "@mantine/core";
+import { Box, Button, ColorInput, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import api from "../api/axios";
-import { brandOptions, categoryOptions } from "../constants";
+import { brandOptions, categoryOptions, colorOptions } from "../constants";
+import { imageToBase64 } from "../util/imageToBase64";
 
 const schema = z.object({
   title: z.string().min(2, { message: "Title should have at least 2 letters" }),
@@ -25,6 +26,7 @@ function CreateProductForm() {
       color: "",
       brand: "",
       price: 0,
+      image: null
     },
     validate: zodResolver(schema),
   });
@@ -32,6 +34,8 @@ function CreateProductForm() {
   const submitProduct = async (values) => {
     setLoading(true);
     try {
+      const image64 = await imageToBase64(values.image)
+      values = { ...values, image: image64 }
       await api.post("/products/", values);
     } catch (error) {
       console.log(error);
@@ -70,11 +74,19 @@ function CreateProductForm() {
           {...form.getInputProps("category")}
         />
 
-        <ColorInput
+        {/* <ColorInput
           disallowInput
           placeholder="Product color"
           label="Color"
           // withAsterisk
+          {...form.getInputProps("color")}
+        /> */}
+
+        <Select
+          data={colorOptions}
+          placeholder="Product color"
+          label="Color"
+          withAsterisk
           {...form.getInputProps("color")}
         />
 
@@ -92,6 +104,14 @@ function CreateProductForm() {
           precision={2}
           withAsterisk
           {...form.getInputProps("price")}
+        />
+
+        <FileInput
+          placeholder="Upload image"
+          label="Product image"
+          description=".png, .jpeg"
+          accept="image/png,image/jpeg"
+          {...form.getInputProps("image")}
         />
 
         <Button type="submit" color="blue" radius="md" size="md">

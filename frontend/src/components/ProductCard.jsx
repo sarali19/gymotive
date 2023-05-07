@@ -7,9 +7,10 @@ function ProductCard({ productData }) {
         <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Card.Section>
                 <Image
-                    src="./src/images/midnightshoes.jpg"
+                    src={productData.image}
                     height={160}
                     alt="nike shoes"
+                    withPlaceholder
                 />
             </Card.Section>
             <Group position="apart" mt="md" mb="xs">
