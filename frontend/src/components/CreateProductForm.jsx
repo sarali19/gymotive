@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, ColorInput, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput } from "@mantine/core";
+import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import api from "../api/axios";
