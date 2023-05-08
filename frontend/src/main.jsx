@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { MantineProvider } from "@mantine/core";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider theme={{
@@ -41,22 +42,37 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           background: "black"
         },
 
-        ".hero-title": {
-          color: "black",
-          fontWeight: 900,
-          lineHeight: 1.1,
-        },
         ".hero-text": {
-          color: "black",
-          fontWeight: 900,
-          lineHeight: 1.1,
-        },
-
-        ".text-on-image": {
+          color: "white",
+          fontWeight: 700,
+          lineHeight: 5,
+          fontFamily: "consolas",
           position: "absolute",
           right: 0.5,
-          left: 0.5,
-          bottom: 15,
+          left: 40,
+          bottom: 170,
+        },
+        ".hero-title": {
+          fontSize: "3em"
+        },
+
+        ".shop-button": {
+          color: "black",
+          background: "white",
+          // fontSize: 28,
+          // textTransform: "uppercase",
+          // textDecoration: "none",
+          // fontFamily: "consolas",
+          // padding: "24px 30px"
+        },
+        ".shop-button:hover": {
+          color: "white",
+          background: "black"
+        },
+        ".training": {
+          color: "black",
+          fontFamily: "Barlow Semi Condensed",
+          fontSize: 40
         },
       })
     }}>

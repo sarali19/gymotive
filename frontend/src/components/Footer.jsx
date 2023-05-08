@@ -8,6 +8,7 @@ function Footer() {
 					{/* Column1 */}
 					<div className="col">
 						<h4>GYMOTIVE INC</h4>
+						<h3>WE’RE WORKING HARD. DAY AFTER DAY.</h3>
 					</div>
 					{/* Column2 */}
 					<div className="col">
@@ -30,10 +31,10 @@ function Footer() {
 				</div>
 				<hr />
 				<div className="row">
-					<p className="col-sm">
-						&copy;{new Date().getFullYear()} gymotive | All rights reserved |
-						Terms Of Service | Privacy
-					</p>
+
+					&copy;{new Date().getFullYear()} gymotive | All rights reserved |
+					Terms Of Service | Privacy
+
 				</div>
 			</div>
 		</div>
