@@ -32,14 +32,6 @@ function ProductsFilter({ fetch }) {
 	return (
 		<Box sx={{ padding: "0px 16px" }}>
 			<form onSubmit={form.onSubmit(handleSubmit)}>
-				{/* <Select
-                    label="Category"
-                    placeholder="Choose a product category"
-                    data={categoryOptions}
-                    clearable
-                    {...form.getInputProps("category")}
-                /> */}
-
 				<Select
 					label="Brand"
 					placeholder="Choose a brand"

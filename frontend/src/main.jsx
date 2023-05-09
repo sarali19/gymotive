@@ -9,12 +9,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <MantineProvider theme={{
       globalStyles: (theme) => ({
         "body": {
-          margin: 0
+          margin: 0,
+          fontFamily: "Consolas"
         },
 
         ".link": {
           color: "inherit",
-          textDecoration: "none"
+          textDecoration: "none",
+          position: "relative"
         },
 
         ".link:hover": {
@@ -74,6 +76,21 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           fontFamily: "Barlow Semi Condensed",
           fontSize: 40
         },
+        ".cartnotif": {
+          color: "white",
+          backgroundColor: "red",
+          borderRadius: "50%",
+          border: "3px solid black",
+          width: "1.2rem",
+          height: "1.2rem",
+          position: "absolute",
+          top: 0,
+          right: 0,
+          transform: "translate(40% , -40%)",
+          textAlign: "center",
+          fontFamily: "sans-serif"
+        },
+
       })
     }}>
       <App />

@@ -11,6 +11,7 @@ function Products() {
 	const [loading, setLoading] = useState(false);
 	const [searchParams] = useSearchParams();
 	const [products, setProducts] = useState([]);
+	const [cartItems, setCartItems] = useState([]);
 
 	async function fetchProducts(filter) {
 		setLoading(true)
@@ -29,6 +30,19 @@ function Products() {
 		}
 		finally {
 			setLoading(false)
+		}
+	}
+
+	async function addToCart(item) {
+		const productItem = cartItems.find(cartItem => cartItem.id === item.id);
+		console.log(productItem);
+		if (productItem) {
+			productItem.quantity += 1;
+			setCartItems([...cartItems]);
+		}
+		else {
+			item.quantity = 1;
+			setCartItems([item, ...cartItems]);
 		}
 	}
 
@@ -78,7 +92,7 @@ function Products() {
 									</Grid>
 								</>
 								:
-								<Text fz="xl" ta="center">No product found 😥</Text>
+								<Text fz="xl" ta="center">No products found 😥</Text>
 						}
 					</Grid.Col>
 				</Grid>

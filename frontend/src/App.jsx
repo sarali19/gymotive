@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import Counter from "./components/Counter";
 import CreateProductForm from "./components/CreateProductForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -10,6 +10,8 @@ import Profile from "./pages/Profile";
 import Footer from "./components/footer";
 import Products from "./components/Products";
 import SearchBar from "./components/SearchBar";
+import Counter from "./components/Counter";
+
 
 
 function App() {
