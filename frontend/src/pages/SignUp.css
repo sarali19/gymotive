@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    background: linear-gradient(135deg,#186c11,#022202);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app-wrapper{
+    background-color: #fff;
+    min-width: 500px;
+    min-height: 650px;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.title{
+    color: #0a4229;
+    font-size: 40px;
+    text-align: center;
+    margin: 80px 0px 40px 0px;
+}
+.name,
+.email,
+.password{
+    margin: 20px;
+    color: #969292;
+    font-size: 16px;
+}
+.password{
+    margin-bottom: 40px;
+}
+.input{
+    height: 32px;
+    font-size: 20px;
+    outline: none;
+    width: 100%;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: 2px solid black;
+    margin-bottom: 10px;
+}
+.error{
+    color: red;
+}
+.submit{
+    display: flex;
+    text-transform: uppercase;
+    width: 200px;
+    text-align: center;
+    font-size: 27px;
+    border-radius: 10px;
+    color: white;
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #073d2d;
+    box-shadow: rgba(0, 0, 0, 0.3)0px 19px 38px,
+    rgba(0, 0, 0, 0.22)0px 15px 12px;
+    margin: auto;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition:all 0.1s;
+}
+.form-success{
+    display: flex;
+    justify-content: center;
+    margin-top: 250px;
+    min-width: 370px;
+    color: #f80759;
+}

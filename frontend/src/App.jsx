@@ -11,6 +11,8 @@ import Footer from "./components/footer";
 import Products from "./components/Products";
 import SearchBar from "./components/SearchBar";
 import Counter from "./components/Counter";
+import FormSignIn from "./pages/FormSignIn";
+import Form from "./pages/Form";
 
 
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/profile" element={<CreateProductForm />} />
+          <Route path="/signup" element={<Form />} />
+          <Route path="/signin" element={<FormSignIn />} />
         </Routes>
         <Footer />
       </Router>
