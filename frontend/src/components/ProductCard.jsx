@@ -5,12 +5,12 @@ import { useLocalStorage } from '@mantine/hooks';
 
 function ProductCard({ productData }) {
 	const [cartItems, setCartItems] = useLocalStorage({ key: "cartItems", defaultValue: [] });
+
 	const itemExists = cartItems.find(item => item.id === productData.id)
 
 	const addToCart = () => {
 		setCartItems([...cartItems, { ...productData, quantity: 1 }])
 	}
-
 
 	return (
 		<Card shadow="sm" padding="lg" radius="md" withBorder>
