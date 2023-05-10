@@ -62,7 +62,7 @@ function Products() {
 	return (
 		<div className='products'>
 			<div className='title'>
-				<h1>shop</h1>
+				<h1>All Products</h1>
 			</div>
 
 			<Container fluid>
