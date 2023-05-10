@@ -45,3 +45,15 @@ model Orders {
   quantity  Int
   total     Float
 }
+
+model Users {
+  id        Int     @unique @default(autoincrement())
+  username  String
+  email     String
+  nom       String?
+  prenom    String?
+  adresse   String?
+  telephone String?
+  password  String
+  role      String
+}

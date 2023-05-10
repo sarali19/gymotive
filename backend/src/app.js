@@ -1,6 +1,7 @@
 import express, { json } from "express";
 import { productsRouter } from "./routes/products";
 import { ordersRouter } from "./routes/orders";
+import { usersRouter } from "./routes/users";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use((request, response, next) => {
 
 app.use(productsRouter);
 app.use(ordersRouter);
+app.use(usersRouter);
 
 app.listen(8000, () => {
   console.log("Server started at http://localhost:8000");
