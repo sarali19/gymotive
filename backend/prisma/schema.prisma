@@ -21,7 +21,8 @@ model Products {
   onSale      Boolean  @default(false)
   image       String?
   createdAt   DateTime @default(now())
-  clients     Orders[]
+  orders      Orders[]
+  carts       Carts[]
 }
 
 model Clients {
@@ -29,9 +30,10 @@ model Clients {
   name      String?
   email     String
   password  String
-  address   String
+  address   String?
   createdAt DateTime @default(now())
-  products  Orders[]
+  orders    Orders[]
+  carts     Carts[]
 }
 
 model Orders {
@@ -46,14 +48,20 @@ model Orders {
   total     Float
 }
 
-model Users {
-  id        Int     @unique @default(autoincrement())
-  username  String
+model Admins {
+  id        String   @unique @default(uuid())
+  name      String?
   email     String
-  nom       String?
-  prenom    String?
-  adresse   String?
-  telephone String?
   password  String
-  role      String
+  createdAt DateTime @default(now())
+}
+
+model Carts {
+  id        String   @unique @default(uuid())
+  clientId  String
+  client    Clients  @relation(fields: [clientId], references: [id])
+  productId String
+  product   Products @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  quantity  Int
 }
