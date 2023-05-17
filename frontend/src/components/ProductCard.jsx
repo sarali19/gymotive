@@ -2,6 +2,7 @@ import React from 'react'
 import { ActionIcon, Badge, Button, Card, Group, Image, Text } from '@mantine/core'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { useLocalStorage } from '@mantine/hooks';
+import { Link } from 'react-router-dom';
 
 function ProductCard({ productData }) {
 	const [cartItems, setCartItems] = useLocalStorage({ key: "cartItems", defaultValue: [] });
@@ -15,12 +16,14 @@ function ProductCard({ productData }) {
 	return (
 		<Card shadow="sm" padding="lg" radius="md" withBorder>
 			<Card.Section>
+				<Link to={`/products/${productData.id}`}>
 				<Image
 					src={productData.image}
 					height={160}
 					alt="nike shoes"
 					withPlaceholder
 				/>
+				</Link>
 			</Card.Section>
 			<Group position="apart" mt="md" mb="xs">
 				<Text weight={500}>{productData.title}</Text>
