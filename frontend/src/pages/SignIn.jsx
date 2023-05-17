@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./SignUp.css"
 import validationIn from "./validationIn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../api/axios"
+import { useLocalStorage } from "@mantine/hooks";
 
 const SignIn = ({ submitForm }) => {
     const [errors, setErrors] = useState({});
@@ -10,6 +12,9 @@ const SignIn = ({ submitForm }) => {
         email: "",
         password: "",
     });
+    const [user, setUser] = useLocalStorage({ key: "user" })
+    const navigate = useNavigate()
+
 
     const handleChange = (event) => {
         setValues({
@@ -19,16 +24,28 @@ const SignIn = ({ submitForm }) => {
         })
     }
 
+    const handleSignin = async (credentials) => {
+        try {
+            const response = await api.post("/users/signin", credentials)
+            setUser(response.data);
+            navigate("/")
+        }
+        catch (error) {
+            console.log(error)
+            setErrors({ ...errors, auth: error.response.data })
+        }
+    }
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
         setErrors(validationIn(values));
         setDataIsCorrect(true);
-        console.log(values)
+        handleSignin(values)
     };
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && dataIsCorrect) {
-            submitForm(true);
+            // submitForm(true);
         }
     }, [errors]);
 
@@ -62,6 +79,7 @@ const SignIn = ({ submitForm }) => {
                         {errors.password && <p className="error">{errors.password}</p>}
                     </div>
                     <div>
+                        <div style={{ textAlign: "center", color: "red", marginBottom: "2rem" }}>{errors.auth || ""}</div>
                         <button className="submit" onClick={handleFormSubmit}>Sign in</button>
                     </div><br /><br /><br />
 

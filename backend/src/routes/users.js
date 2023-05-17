@@ -1,4 +1,3 @@
-
 import express from "express";
 import {
     getUsersHandler,
@@ -12,7 +11,7 @@ import {
 
 export const usersRouter = express.Router();
 
-// Get users
+// Get all users
 usersRouter.get("/users", getUsersHandler);
 // Get user by id
 usersRouter.get("/users/:id", getUserByIdHandler);

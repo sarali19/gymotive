@@ -6,6 +6,9 @@ export async function getClientCartHandler(req, res) {
     const result = await prisma.carts.findMany({
       where: {
         clientId: clientId
+      },
+      include: {
+        product: true
       }
     });
 
@@ -33,22 +36,22 @@ export async function updateClientCartProductHandler(req, res) {
   const quantity = req.body.quantity;
 
   try {
-    const result = await prisma.carts.findFirst({
+    const cartItem = await prisma.carts.findFirst({
       where: {
         clientId: clientId,
         productId: productId,
       },
     })
-    await prisma.carts.update({
+    const result = await prisma.carts.update({
       where: {
-        id: result.id
+        id: cartItem.id
       },
       data: {
         quantity: quantity
       }
     })
 
-    res.send("Product updated in cart");
+    res.send(result);
   }
   catch (error) {
     res.status(500).send({ message: "Error updating item" });

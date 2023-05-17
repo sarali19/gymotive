@@ -5,6 +5,7 @@ export async function getUsersHandler(req, res) {
   const result = await table.findMany();
   res.send(result);
 }
+// https://localhost:8000/users?isAdmin=true
 
 export async function getUserByIdHandler(req, res) {
   const table = req.query.isAdmin === "true" ? prisma.admins : prisma.clients;
@@ -52,7 +53,7 @@ export async function signinHandler(req, res) {
       res.status(400).send("Invalid email or password")
     }
     else {
-      res.send(user)
+      res.send({ ...user, isAdmin: req.query.isAdmin === "true" })
     }
   }
 }
