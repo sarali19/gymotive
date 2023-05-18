@@ -5,8 +5,8 @@ export async function getOrdersHandler(req, res) {
   res.send(result);
 }
 
-export async function getOrderByIdHandler(req, res) {
-  const result = await prisma.orders.findUnique({ where: { id: req.params.id } });
+export async function getOrdersByClientIdHandler(req, res) {
+  const result = await prisma.orders.findUnique({ where: { clientId: req.params.clientId } });
   if (result) {
     res.send(result);
   } else {

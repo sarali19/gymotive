@@ -35,7 +35,6 @@ function Navbar() {
 						<AiOutlineShoppingCart size={32} />
 						<div className="cartnotif">{cartItems.length}</div>
 					</Link>}
-					{/* <Link to="/profile" className="link"><AiOutlineUser size={32} /></Link> */}
 
 					{user
 						?
