@@ -1,5 +1,5 @@
 import express from "express";
-import { createOrderHandler, getOrdersByClientIdHandler, getOrdersHandler } from "../handlers/orders";
+import { createOrdersHandler, getOrdersByClientIdHandler, getOrdersHandler } from "../handlers/orders";
 
 export const ordersRouter = express.Router();
 
@@ -7,5 +7,5 @@ export const ordersRouter = express.Router();
 ordersRouter.get("/orders", getOrdersHandler);
 // Get order by id
 ordersRouter.get("/orders/:clientId", getOrdersByClientIdHandler);
-// Create order
-ordersRouter.post("/orders", createOrderHandler);
+// Create many orders
+ordersRouter.post("/orders", createOrdersHandler);

@@ -1,16 +1,29 @@
 import { prisma } from "../prisma";
 
 export async function getUsersHandler(req, res) {
-  const table = req.query.isAdmin === "true" ? prisma.admins : prisma.clients;
-  const result = await table.findMany({
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      address: true,
-      createdAt: true,
-    }
-  });
+  let result;
+  if (req.query.isAdmin === "true") {
+    result = await prisma.admins.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+        // password: true
+      }
+    });
+  }
+  else {
+    result = await prisma.clients.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        address: true,
+        createdAt: true,
+      }
+    });
+  }
   res.send(result);
 }
 // https://localhost:8000/users?isAdmin=true

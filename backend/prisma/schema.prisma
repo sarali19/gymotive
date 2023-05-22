@@ -37,12 +37,12 @@ model Clients {
 }
 
 model Orders {
-  id        String   @unique @default(uuid())
+  id        String    @unique @default(uuid())
   clientId  String
-  client    Clients  @relation(fields: [clientId], references: [id])
+  client    Clients   @relation(fields: [clientId], references: [id])
   productId String
-  product   Products @relation(fields: [productId], references: [id])
-  createdAt DateTime @default(now())
+  product   Products? @relation(fields: [productId], references: [id], onDelete: NoAction)
+  createdAt DateTime  @default(now())
   status    String?
   quantity  Int
   total     Float
@@ -61,7 +61,7 @@ model Carts {
   clientId  String
   client    Clients  @relation(fields: [clientId], references: [id])
   productId String
-  product   Products @relation(fields: [productId], references: [id])
+  product   Products @relation(fields: [productId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   quantity  Int
 }

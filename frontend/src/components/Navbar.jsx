@@ -44,7 +44,11 @@ function Navbar() {
 							</Menu.Target>
 
 							<Menu.Dropdown>
-								<Menu.Item icon={<AiOutlineUser size={14} />} onClick={() => navigate("/profile")}>My profile</Menu.Item>
+								{user.isAdmin ?
+									<Menu.Item icon={<AiOutlineUser size={14} />} onClick={() => navigate("/dashboard")}>My dashboard</Menu.Item>
+									:
+									<Menu.Item icon={<AiOutlineUser size={14} />} onClick={() => navigate("/profile")}>My profile</Menu.Item>
+								}
 								<Menu.Item color="red" icon={<CgLogOut size={14} />} onClick={handleLogout}>Logout</Menu.Item>
 							</Menu.Dropdown>
 						</Menu>

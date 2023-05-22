@@ -26,7 +26,7 @@ const SignIn = ({ submitForm }) => {
 
     const handleSignin = async (credentials) => {
         try {
-            const response = await api.post("/users/signin", credentials)
+            const response = await api.post("/users/signin?isAdmin=true", credentials)
             setUser(response.data);
             navigate("/")
         }

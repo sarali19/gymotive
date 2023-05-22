@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       globalStyles: (theme) => ({
         "body": {
           margin: 0,
-          fontFamily: "Consolas"
+          // fontFamily: "Consolas"
         },
 
         ".link": {
@@ -90,7 +90,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           textAlign: "center",
           fontFamily: "sans-serif"
         },
-
+        "li a": {
+          color: "white",
+          textDecoration: "none"
+        }
       })
     }}>
       <App />
