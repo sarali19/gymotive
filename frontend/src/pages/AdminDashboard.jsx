@@ -79,6 +79,7 @@ function AdminDashboard() {
                     <th>Status</th>
                     <th>Quantity</th>
                     <th>Total</th>
+                    <th>Created at</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -91,6 +92,8 @@ function AdminDashboard() {
                       <td>{item.status}</td>
                       <td>{item.quantity}</td>
                       <td>{item.total}</td>
+                      <td>{item.createdAt}</td>
+
                     </tr>)}
                 </tbody>
               </Table>
