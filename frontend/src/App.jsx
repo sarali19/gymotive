@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 import Products from "./components/Products";
 import Form from "./pages/Form";
 import FormSignIn from "./pages/FormSignIn";
-
+import { ProductDetails } from "./components/ProductDetails";
 
 
 function App() {
@@ -27,6 +27,8 @@ function App() {
           <Route path="/profile" element={<CreateProductForm />} />
           <Route path="/signup" element={<Form />} />
           <Route path="/signin" element={<FormSignIn />} />
+          
+          <Route path="/products/:id" element={<ProductDetails />} />
         </Routes>
         <Footer />
       </Router>

@@ -61,9 +61,7 @@ function Products() {
 
 	return (
 		<div className='products'>
-			<div className='title'>
-				<h1>All Products</h1>
-			</div>
+			<h1>All Products</h1>
 
 			<Container fluid>
 				<Grid>

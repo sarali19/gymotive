@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import SignUp from "./SignUp";
 import { Link } from "react-router-dom";
 
-const Form =() =>{
-    const [formIsSubmitted,setFormIsSubmitted]=useState(false);
+const Form = () => {
+    const [formIsSubmitted, setFormIsSubmitted] = useState(false);
 
-    const submitForm=() =>{
+    const submitForm = () => {
         setFormIsSubmitted(true);
     };
-    return(
+    return (
         <div>
-            {!formIsSubmitted ?(
-                <SignUp submitForm={submitForm}/>
-            ):(
+            {!formIsSubmitted ? (
+                <SignUp submitForm={submitForm} />
+            ) : (
                 <div className="container">
                     <div className="app-wrapper">
                         <h1 className="form-success">Account Created!</h1>
