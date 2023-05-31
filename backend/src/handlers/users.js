@@ -1,14 +1,44 @@
 import { prisma } from "../prisma";
 
 export async function getUsersHandler(req, res) {
-  const table = req.query.isAdmin === "true" ? prisma.admins : prisma.clients;
-  const result = await table.findMany();
+  let result;
+  if (req.query.isAdmin === "true") {
+    result = await prisma.admins.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+        // password: true
+      }
+    });
+  }
+  else {
+    result = await prisma.clients.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        address: true,
+        createdAt: true,
+      }
+    });
+  }
   res.send(result);
 }
+// https://localhost:8000/users?isAdmin=true
 
 export async function getUserByIdHandler(req, res) {
   const table = req.query.isAdmin === "true" ? prisma.admins : prisma.clients;
-  const result = await table.findUnique({ where: { id: req.params.id } });
+  const result = await table.findUnique({
+    where: { id: req.params.id }, select: {
+      id: true,
+      name: true,
+      email: true,
+      address: true,
+      createdAt: true,
+    }
+  });
   if (result) {
     res.send(result);
   } else {
@@ -52,20 +82,29 @@ export async function signinHandler(req, res) {
       res.status(400).send("Invalid email or password")
     }
     else {
-      res.send(user)
+      const userWithoutPassword = { ...user, isAdmin: req.query.isAdmin === "true" };
+      delete userWithoutPassword["password"]
+      res.send(userWithoutPassword)
     }
   }
 }
 
 export async function updateUserHandler(req, res) {
   const table = req.query.isAdmin === "true" ? prisma.admins : prisma.clients;
-  await table.update({
+  const updatedUser = await table.update({
     where: {
       id: req.params.id,
     },
     data: req.body,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      address: true,
+      createdAt: true,
+    }
   });
-  res.send("User updated");
+  res.send(updatedUser);
 }
 
 export async function deleteUserHandler(req, res) {

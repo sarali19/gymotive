@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import Counter from "./components/Counter";
 import CreateProductForm from "./components/CreateProductForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar";
@@ -11,7 +10,10 @@ import Footer from "./components/Footer";
 import Products from "./components/Products";
 import Form from "./pages/Form";
 import FormSignIn from "./pages/FormSignIn";
+
+import AdminDashboard from "./pages/AdminDashboard";
 import { ProductDetails } from "./components/ProductDetails";
+
 
 
 function App() {
@@ -24,7 +26,9 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/profile" element={<CreateProductForm />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/dashboard/create-product" element={<CreateProductForm />} />
+          <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/signup" element={<Form />} />
           <Route path="/signin" element={<FormSignIn />} />
           

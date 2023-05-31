@@ -74,14 +74,6 @@ function CreateProductForm() {
           {...form.getInputProps("category")}
         />
 
-        {/* <ColorInput
-          disallowInput
-          placeholder="Product color"
-          label="Color"
-          // withAsterisk
-          {...form.getInputProps("color")}
-        /> */}
-
         <Select
           data={colorOptions}
           placeholder="Product color"

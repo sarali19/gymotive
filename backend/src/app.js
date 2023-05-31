@@ -12,6 +12,7 @@ app.use((request, response, next) => {
   // Allowed sources and headers
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  response.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   return next();
 });
 
