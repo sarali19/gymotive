@@ -30,11 +30,15 @@ function Navbar() {
 					<Link to="/products?category=Supplements" className="category-button">Supplements</Link>
 				</Group>
 				<Group>
-					<Link to="/wishlist" className="link"><AiOutlineHeart size={32} /></Link>
-					{user && <Link to="/cart" className="link">
-						<AiOutlineShoppingCart size={32} />
-						<div className="cartnotif">{cartItems.length}</div>
-					</Link>}
+					{user && !user.isAdmin &&
+						<>
+							<Link to="/wishlist" className="link"><AiOutlineHeart size={32} /></Link>
+							<Link to="/cart" className="link">
+								<AiOutlineShoppingCart size={32} />
+								<div className="cartnotif">{cartItems.length}</div>
+							</Link>
+						</>
+					}
 
 					{user
 						?

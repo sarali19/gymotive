@@ -119,7 +119,8 @@ function Profile() {
         </Tabs.Panel>
 
         <Tabs.Panel value="orders" pt="xs">
-          {clientOrders.map(item => item.product.title).join(",\n")}
+          {/* TODO */}
+          {clientOrders.map(item => item.product.title)}
         </Tabs.Panel>
       </Tabs>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { BackgroundImage, Blockquote, Box, Button, Center, Container, Image, Stack, Text, Title } from '@mantine/core'
+import { Button, Center, Image, Stack, Text, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
 import { Carousel } from '@mantine/carousel'
 
