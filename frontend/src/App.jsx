@@ -10,7 +10,9 @@ import Footer from "./components/Footer";
 import Products from "./components/Products";
 import Form from "./pages/Form";
 import FormSignIn from "./pages/FormSignIn";
+
 import AdminDashboard from "./pages/AdminDashboard";
+import { ProductDetails } from "./components/ProductDetails";
 
 
 
@@ -29,6 +31,8 @@ function App() {
           <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/signup" element={<Form />} />
           <Route path="/signin" element={<FormSignIn />} />
+          
+          <Route path="/products/:id" element={<ProductDetails />} />
         </Routes>
         <Footer />
       </Router>
