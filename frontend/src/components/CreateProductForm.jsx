@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput } from "@mantine/core";
+import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput, Center } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import api from "../api/axios";
@@ -106,9 +106,11 @@ function CreateProductForm() {
           {...form.getInputProps("image")}
         />
 
-        <Button type="submit" color="green" radius="md" size="md">
-          Create product
-        </Button>
+        <Center>
+          <Button type="submit" color="green" radius="md" size="md" mt={20}>
+            Create product
+          </Button>
+        </Center>
       </form>
     </Box>
   );
