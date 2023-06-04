@@ -28,10 +28,14 @@ const SignUp = ({ isAdmin }) => {
   const submit = async (values) => {
     setLoading(true);
     try {
-      const { name, email, password, address } = values;
-      await api.post("users/signup", { name, email, password, address }, { params: { isAdmin: !!isAdmin } });
+      const { name, email, password } = values;
+      let data = { name, email, password };
+      if (!isAdmin) {
+        data = { ...data, address: values.address };
+      }
+      await api.post("users/signup", data, { params: { isAdmin: !!isAdmin } });
       alert("Account created successfully!");
-      navigate("/signin");
+      navigate(`/signin${isAdmin ? "/admin" : ""}}`);
     } catch (error) {
       window.alert(error.response.data);
     } finally {

@@ -12,6 +12,8 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ProductDetails from "./pages/ProductDetails";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import NotFound from "./pages/NotFound";
+import EditProductForm from "./components/EditProductForm";
 
 function PageLayout() {
   return (
@@ -28,9 +30,10 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/dashboard/create-product" element={<CreateProductForm />} />
-          <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/" element={<PageLayout />}>
+            <Route path="/dashboard/edit-product/:productId" element={<EditProductForm />} />
+            <Route path="/dashboard/create-product" element={<CreateProductForm />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products" element={<Products />} />
@@ -38,7 +41,9 @@ function App() {
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/signup/admin" element={<SignUp isAdmin />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin/admin" element={<SignIn isAdmin />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
         <Footer />

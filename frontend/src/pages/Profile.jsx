@@ -7,6 +7,7 @@ import {
   Loader,
   Paper,
   SimpleGrid,
+  Table,
   Tabs,
   Text,
   TextInput,
@@ -133,8 +134,32 @@ function Profile() {
         </Tabs.Panel>
 
         <Tabs.Panel value="orders" pt="xs">
-          {/* TODO */}
-          {clientOrders.map((item) => item.product.title)}
+          <Table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>ProductId</th>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Quantity</th>
+                <th>Total (MAD)</th>
+                <th>Created at</th>
+              </tr>
+            </thead>
+            <tbody>
+              {clientOrders.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.productId}</td>
+                  <td>{item.product.title}</td>
+                  <td>{item.status}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.total}</td>
+                  <td>{new Date(item.createdAt).toString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </Tabs.Panel>
       </Tabs>
     </Box>

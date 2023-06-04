@@ -23,7 +23,6 @@ function ProductsFilter({ fetch, defaultCategory }) {
       priceMin: values.price[0],
       priceMax: values.price[1],
     };
-    // console.log(values)
     fetch(params);
   };
 

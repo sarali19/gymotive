@@ -1,4 +1,4 @@
-import { Image, Text, createStyles, Button, rem, Container, Grid, Title, NumberInput, Badge } from "@mantine/core";
+import { Image, Text, Button, Container, Grid, Title, NumberInput, Badge } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/axios";
@@ -78,7 +78,7 @@ function ProductDetails() {
               </Badge>
             )}
           </Text>
-          <Text mt={50}>{productDetails.description}</Text>
+          <Text my={50}>{productDetails.description}</Text>
 
           <NumberInput
             value={count}

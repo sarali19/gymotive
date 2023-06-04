@@ -11,7 +11,7 @@ const schema = z.object({
   password: z.string().min(1, "Enter your password"),
 });
 
-const SignIn = () => {
+const SignIn = ({ isAdmin }) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useLocalStorage({ key: "user" });
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const SignIn = () => {
   const submit = async (values) => {
     setLoading(true);
     try {
-      const response = await api.post("/users/signin", values);
+      const response = await api.post("/users/signin", values, { params: { isAdmin } });
       setUser(response.data);
       navigate("/");
     } catch (error) {
