@@ -77,3 +77,17 @@ export async function deleteClientCartProductHandler(req, res) {
     res.status(500).send("Error deleting cart item");
   }
 }
+
+export async function deleteClientCartAllProductsHandler(req, res) {
+  const clientId = req.params.clientId;
+  try {
+    await prisma.carts.deleteMany({
+      where: {
+        clientId: clientId,
+      },
+    });
+    res.send("all cart items deleted");
+  } catch (error) {
+    res.status(500).send("Error deleting cart items");
+  }
+}
