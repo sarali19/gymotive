@@ -3,7 +3,8 @@ import { prisma } from "../prisma";
 export async function getOrdersHandler(req, res) {
   const result = await prisma.orders.findMany({
     include: {
-      product: true
+      product: true,
+      client: true
     }
   });
   res.send(result);

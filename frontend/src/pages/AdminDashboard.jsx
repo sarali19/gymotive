@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Tabs, Table, Group, ActionIcon, Button, Modal, Center, Loader, Text } from '@mantine/core'
+import { Box, Tabs, Table, Group, ActionIcon, Button, Modal, Center, Loader, Text, TextInput } from '@mantine/core'
 import { AiFillEdit, AiOutlineClose, AiOutlinePlus, AiOutlineUser } from 'react-icons/ai'
 import { BsFillBox2Fill } from 'react-icons/bs'
 import api from '../api/axios'
@@ -12,6 +12,7 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
   const [productToDelete, setProductToDelete] = useState(false);
+  const [keyword, setKeyword] = useState("");
 
   const fetchData = async () => {
     setLoading(true)
@@ -69,11 +70,12 @@ function AdminDashboard() {
           :
           <>
             <Tabs.Panel value="orders" pt="xs">
+              <TextInput value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder='Search client by name or email' />
               <Table>
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>ClientId</th>
+                    <th>Client</th>
                     <th>ProductId</th>
                     <th>Product</th>
                     <th>Status</th>
@@ -83,10 +85,10 @@ function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((item) =>
+                  {orders.filter(item => item.client.name.includes(keyword) || item.client.email.includes(keyword)).map((item) =>
                     <tr key={item.id}>
                       <td>{item.id}</td>
-                      <td>{item.clientId}</td>
+                      <td>{item.client.name} ({item.client.email})</td>
                       <td>{item.productId}</td>
                       <td>{item.product.title}</td>
                       <td>{item.status}</td>
