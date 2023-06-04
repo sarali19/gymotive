@@ -1,140 +1,91 @@
-import React, { useEffect, useState } from "react";
-import "./SignUp.css"
-import validation from "./validation";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import api from "../api/axios";
+import { Box, Button, Loader, PasswordInput, Text, TextInput } from "@mantine/core";
+import { useForm, zodResolver } from "@mantine/form";
+import { z } from "zod";
 
-const SignUp = ({ submitForm }) => {
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: "",
-        address: "",
-        role: "",
-        phoneNumber: "",
-    });
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const { name, email, password } = formData
-            await api.post('users/signup', { name, email, password });
-            alert('Account created successfully!');
-            navigate("/signin")
-        } catch (error) {
-            console.log(error);
-        }
-    };
+const schema = z.object({
+  name: z.string().min(1, { message: "Please enter your name" }),
+  email: z.string().email(),
+  password: z.string().min(1, "Please enter a password"),
+});
 
-    const [values, setValues] = useState({
-        username: "",
-        email: "",
-        password: "",
+const SignUp = ({ isAdmin }) => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-    });
-    const handleChange = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
+  const form = useForm({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      address: "",
+    },
+    validate: zodResolver(schema),
+  });
 
-        })
+  const submit = async (values) => {
+    setLoading(true);
+    try {
+      const { name, email, password, address } = values;
+      await api.post("users/signup", { name, email, password, address }, { params: { isAdmin: !!isAdmin } });
+      alert("Account created successfully!");
+      navigate("/signin");
+    } catch (error) {
+      window.alert(error.response.data);
+    } finally {
+      setLoading(false);
     }
-    const [errors, setErrors] = useState({});
-    const [dataIsCorrect, setDataIsCorrect] = useState(false);
+  };
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setErrors(validation(values));
-        setDataIsCorrect(true);
-    };
+  return (
+    <Box maw={350} mx="auto" p={50} bg="white">
+      <Text fw={700} fz="xl">
+        Create account {isAdmin && "(Admin)"}
+      </Text>
 
-    useEffect(() => {
-        if (Object.keys(errors).length === 0 && dataIsCorrect) {
-            submitForm(true);
-        }
-    }, [errors]);
+      <form onSubmit={form.onSubmit(submit)}>
+        <TextInput
+          placeholder="John Doe"
+          label="Full name"
+          withAsterisk
+          {...form.getInputProps("name")}
+          disabled={loading}
+        />
+        {!isAdmin && (
+          <TextInput placeholder="Address" label="Address" {...form.getInputProps("address")} disabled={loading} />
+        )}
+        <TextInput
+          placeholder="example@mail.com"
+          label="Email"
+          withAsterisk
+          {...form.getInputProps("email")}
+          disabled={loading}
+        />
+        <PasswordInput
+          placeholder="Password"
+          label="Password"
+          withAsterisk
+          {...form.getInputProps("password")}
+          disabled={loading}
+        />
 
-    return (
-        <div className="container">
-            <div className="app-wrapper">
-                <div>
-                    <h2 className="title">
-                        Create Account
-                    </h2>
-                </div>
-
-                <form className="form-wrapper" onSubmit={handleSubmit}>
-                    <div className="name">
-                        <label className="label">Full name</label>
-                        <input
-                            className="input"
-                            type="text"
-                            name="usename"
-                            value={formData?.name} onChange={(e) => setFormData({ ...formData, name: e.currentTarget.value })}
-                            required></input>
-                        {errors.name && <p className="error">{errors.name}</p>}
-                    </div>
-                    <div className="email">
-                        <label className="label">Email</label>
-                        <input className="input"
-                            type="email"
-                            name="email"
-                            value={formData?.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.currentTarget.value })}
-                            required></input>
-                        {errors.email && <p className="error">{errors.email}</p>}
-                    </div>
-                    <div className="password">
-                        <label className="label">Password</label>
-                        <input className="input"
-                            type="password"
-                            name="password"
-                            value={formData?.password}
-                            onChange={(e) => setFormData({ ...formData, password: e.currentTarget.value })}
-                            required></input>
-                        {errors.password && <p className="error">{errors.password}</p>}
-                    </div>
-                    <div className="name">
-                        <label className="label">Phone number</label>
-                        <input className="input"
-                            type="text"
-                            value={formData?.phoneNumber}
-                            onChange={(e) => setFormData({ ...formData, phoneNumber: e.currentTarget.value })}
-                        ></input>
-                    </div>
-                    <div className="name">
-                        <label className="label">Address</label>
-                        <input className="input"
-                            type="text"
-                            value={formData?.address}
-                            onChange={(e) => setFormData({ ...formData, address: e.currentTarget.value })}
-                        ></input>
-                    </div>
-                    <div className="name">
-                        <label className="label">Role</label>
-                        <select className="input" name="role" value={formData?.role}
-                            onChange={(e) => setFormData({ ...formData, role: e.currentTarget.value })} required>
-
-                            <option value='User' name="role" >User</option>
-                            <option value='Admin' name="role" >Admin</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <button className="submit" >Sign up</button>
-                    </div>
-                </form>
-                <br /><br /><br />
-                <div>
-                    <Link to="/signin">Return to <b>Sign In</b></Link>
-                </div>
-            </div>
-        </div>
-
-    )
-
-
-}
+        <Box mt={25} sx={{ textAlign: "center" }}>
+          <Button type="submit" color="green" radius="md" size="md" mb={10} disabled={loading}>
+            {loading ? <Loader size={"sm"} color="gray" /> : "Sign up"}
+          </Button>
+          <div>
+            <Link to="/signin">
+              <Text color="dark">
+                Already have an account? <b>Sign In</b>!
+              </Text>
+            </Link>
+          </div>
+        </Box>
+      </form>
+    </Box>
+  );
+};
 
 export default SignUp;

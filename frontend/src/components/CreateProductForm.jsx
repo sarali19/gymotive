@@ -26,7 +26,7 @@ function CreateProductForm() {
       color: "",
       brand: "",
       price: 0,
-      image: null
+      image: null,
     },
     validate: zodResolver(schema),
   });
@@ -34,8 +34,8 @@ function CreateProductForm() {
   const submitProduct = async (values) => {
     setLoading(true);
     try {
-      const image64 = await imageToBase64(values.image)
-      values = { ...values, image: image64 }
+      const image64 = await imageToBase64(values.image);
+      values = { ...values, image: image64 };
       await api.post("/products/", values);
     } catch (error) {
       console.log(error);
@@ -51,7 +51,7 @@ function CreateProductForm() {
   return (
     <Box maw={350} mx="auto">
       <Text fw={700} fz="xl">
-        Create a new product:
+        Create a new product
       </Text>
 
       <form onSubmit={form.onSubmit(submitProduct)}>
@@ -106,7 +106,7 @@ function CreateProductForm() {
           {...form.getInputProps("image")}
         />
 
-        <Button type="submit" color="blue" radius="md" size="md">
+        <Button type="submit" color="green" radius="md" size="md">
           Create product
         </Button>
       </form>

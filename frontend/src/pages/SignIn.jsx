@@ -1,98 +1,79 @@
 import React, { useEffect, useState } from "react";
-import "./SignUp.css"
-import validationIn from "./validationIn";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/axios"
+import api from "../api/axios";
+import { Box, Button, Loader, Paper, PasswordInput, Text, TextInput } from "@mantine/core";
+import { useForm, zodResolver } from "@mantine/form";
+import { z } from "zod";
 import { useLocalStorage } from "@mantine/hooks";
 
-const SignIn = ({ submitForm }) => {
-    const [errors, setErrors] = useState({});
-    const [dataIsCorrect, setDataIsCorrect] = useState(false);
-    const [values, setValues] = useState({
-        email: "",
-        password: "",
-    });
-    const [user, setUser] = useLocalStorage({ key: "user" })
-    const navigate = useNavigate()
+const schema = z.object({
+  email: z.string().email().min(1, "Enter your email"),
+  password: z.string().min(1, "Enter your password"),
+});
 
+const SignIn = () => {
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useLocalStorage({ key: "user" });
+  const navigate = useNavigate();
 
-    const handleChange = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value,
+  const form = useForm({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate: zodResolver(schema),
+  });
 
-        })
+  const submit = async (values) => {
+    setLoading(true);
+    try {
+      const response = await api.post("/users/signin", values);
+      setUser(response.data);
+      navigate("/");
+    } catch (error) {
+      window.alert(error.response.data);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const handleSignin = async (credentials) => {
-        try {
-            const response = await api.post("/users/signin", credentials)
-            setUser(response.data);
-            navigate("/")
-        }
-        catch (error) {
-            console.log(error)
-            setErrors({ ...errors, auth: error.response.data })
-        }
-    }
+  return (
+    <Box maw={350} mx="auto" p={50} bg="white">
+      <Text fw={700} fz="xl">
+        Sign in
+      </Text>
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        setErrors(validationIn(values));
-        setDataIsCorrect(true);
-        handleSignin(values)
-    };
+      <form onSubmit={form.onSubmit(submit)}>
+        <TextInput
+          placeholder="example@mail.com"
+          label="Email"
+          withAsterisk
+          {...form.getInputProps("email")}
+          disabled={loading}
+        />
+        <PasswordInput
+          placeholder="Password"
+          label="Password"
+          withAsterisk
+          {...form.getInputProps("password")}
+          disabled={loading}
+        />
 
-    useEffect(() => {
-        if (Object.keys(errors).length === 0 && dataIsCorrect) {
-            // submitForm(true);
-        }
-    }, [errors]);
-
-    return (
-        <div className="container">
-            <div className="app-wrapper">
-                <div>
-                    <h2 className="title">
-                        Login Account
-                    </h2>
-                </div>
-
-                <form className="form-wrapper">
-
-                    <div className="email">
-                        <label className="label">Email</label>
-                        <input className="input"
-                            type="email"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange}></input>
-                        {errors.email && <p className="error">{errors.email}</p>}
-                    </div>
-                    <div className="password">
-                        <label className="label">Password</label>
-                        <input className="input"
-                            type="password"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange}></input>
-                        {errors.password && <p className="error">{errors.password}</p>}
-                    </div>
-                    <div>
-                        <div style={{ textAlign: "center", color: "red", marginBottom: "2rem" }}>{errors.auth || ""}</div>
-                        <button className="submit" onClick={handleFormSubmit}>Sign in</button>
-                    </div><br /><br /><br />
-
-                </form>
-                <div>
-                    <Link to="/signup">You don't have an account yet? <b>Sign Up</b></Link>
-                </div>
-            </div>
-        </div>
-
-    )
-
-
-}
+        <Box mt={25} sx={{ textAlign: "center" }}>
+          <Button type="submit" color="green" radius="md" size="md" mb={10} disabled={loading}>
+            {loading ? <Loader size={"sm"} color="gray" /> : "Sign in"}
+          </Button>
+          <div>
+            <Link to="/signup">
+              <Text color="dark">
+                You don't have an account yet? <b>Sign up</b>!
+              </Text>
+            </Link>
+          </div>
+        </Box>
+      </form>
+    </Box>
+  );
+};
 
 export default SignIn;

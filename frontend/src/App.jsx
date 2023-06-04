@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import CreateProductForm from "./components/CreateProductForm";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Footer from "./components/Footer";
-import Products from "./components/Products";
-import Form from "./pages/Form";
-import FormSignIn from "./pages/FormSignIn";
+import Products from "./pages/Products";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProductDetails from "./pages/ProductDetails";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 
-
+function PageLayout() {
+  return (
+    <div style={{ minHeight: "100vh", background: "#ffffff" /* "#ececec" */, padding: 50 }}>
+      <Outlet />
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -22,20 +28,21 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard/create-product" element={<CreateProductForm />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
-          <Route path="/signup" element={<Form />} />
-          <Route path="/signin" element={<FormSignIn />} />
-
-          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/" element={<PageLayout />}>
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route path="/signup/admin" element={<SignUp isAdmin />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+          </Route>
         </Routes>
         <Footer />
       </Router>
-      {/* <Counter /> */}
     </div>
   );
 }

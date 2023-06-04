@@ -5,17 +5,16 @@ export async function getClientCartHandler(req, res) {
   try {
     const result = await prisma.carts.findMany({
       where: {
-        clientId: clientId
+        clientId: clientId,
       },
       include: {
-        product: true
-      }
+        product: true,
+      },
     });
 
     res.send(result);
-  }
-  catch (error) {
-    res.status(500).send("Error fetching cart items")
+  } catch (error) {
+    res.status(500).send("Error fetching cart items");
   }
 }
 
@@ -24,9 +23,9 @@ export async function addProductToClientCartHandler(req, res) {
     data: {
       clientId: req.params.clientId,
       productId: req.params.productId,
-      quantity: 1
-    }
-  })
+      quantity: req.body?.quantity || 1,
+    },
+  });
   res.send("Product added to cart");
 }
 
@@ -41,19 +40,18 @@ export async function updateClientCartProductHandler(req, res) {
         clientId: clientId,
         productId: productId,
       },
-    })
+    });
     const result = await prisma.carts.update({
       where: {
-        id: cartItem.id
+        id: cartItem.id,
       },
       data: {
-        quantity: quantity
-      }
-    })
+        quantity: quantity,
+      },
+    });
 
     res.send(result);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).send({ message: "Error updating item" });
   }
 }
@@ -68,16 +66,14 @@ export async function deleteClientCartProductHandler(req, res) {
         clientId: clientId,
         productId: productId,
       },
-    })
+    });
     await prisma.carts.delete({
       where: {
-        id: result.id
-      }
-    })
+        id: result.id,
+      },
+    });
     res.send("Cart item deleted");
+  } catch (error) {
+    res.status(500).send("Error deleting cart item");
   }
-  catch (error) {
-    res.status(500).send("Error deleting cart item")
-  }
-
 }
