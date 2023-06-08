@@ -1,6 +1,6 @@
 import React from "react";
 import { ActionIcon, Badge, Button, Card, Group, Image, Text } from "@mantine/core";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useLocalStorage } from "@mantine/hooks";
 
 import api from "../api/axios";
@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 function ProductCard({ productData }) {
   const [cartItems, setCartItems] = useLocalStorage({ key: "cartItems", defaultValue: [] });
   const [user] = useLocalStorage({ key: "user" });
+  const [wishlistItems, setWishlistItems] = useLocalStorage({ key: "wishlistItems", defaultValue: [] });
 
   const itemExists = cartItems.find((item) => item.id === productData.id);
+  const itemInWishlist = wishlistItems.find((item) => item.id === productData.id);
 
   const addToCart = async () => {
     setCartItems([...cartItems, { ...productData, quantity: 1 }]);
@@ -21,6 +23,10 @@ function ProductCard({ productData }) {
       console.log(error);
     }
   };
+
+  const addToWishlist = async () => {
+    setWishlistItems([...wishlistItems, { ...productData }]);
+  }
 
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -62,8 +68,17 @@ function ProductCard({ productData }) {
         </div>
       )}
 
-      <ActionIcon variant="default" radius="md" size={36}>
-        <AiOutlineHeart size={32} />
+      <ActionIcon
+        sx={{
+          '&[data-disabled]': { color: "red" },
+        }}
+        variant="transparent"
+        radius="md"
+        size={36}
+        color={!itemInWishlist ? "gray" : "red"}
+        disabled={itemInWishlist ? true : false}
+        onClick={addToWishlist}>
+        <AiFillHeart size={32} />
       </ActionIcon>
     </Card>
   );

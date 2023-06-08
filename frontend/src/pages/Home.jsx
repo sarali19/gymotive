@@ -24,13 +24,20 @@ const Home = () => {
       </header>
       <Center className="training">
         <div>
-          <Title align="center">TRAINING IS EVERYTHING</Title>
-          <Text fw={500} fz="md">At our core, Gymotive is a training brand for people who work hard and don't believe in excuses. </Text>
+          <Title size="h1" align="center">WE ARE HERE FOR YOU</Title>
+          <Text fw={500} fz="md">SHOPPING FOR THE RIGHT TRAINING GEAR SHOULDN'T BE AS HARD AS YOUR WORKOUTS. </Text>
         </div>
       </Center>
+
       <Center className="training">
         <div>
-          <Title order={1} align="center">WHAT TRAINING MEANS TO US?</Title>
+
+          <Title size="h1" align="center">WHAT TRAINING MEANS TO US?</Title>
+          <Text fw={500} fz="md" style={{ padding: 20 }}>
+
+            At our core, GYMOTIVE is a training brand for people who work hard and don’t believe in excuses. Our community has grown to millions of athletes from all over the world.
+
+            As we’ve witnessed this unfold, we have gone on a soul searching exercise to try to define training for our community. What we learned is that our community is the one defining it for us. Each individual, every day, in their own personal way.</Text>
 
           <Carousel
             loop
@@ -59,6 +66,12 @@ const Home = () => {
             <Carousel.Slide><Image src="./src/images/tiatoomey.png" /></Carousel.Slide>
             <Carousel.Slide><Image src="./src/images/golf.png" /></Carousel.Slide>
           </Carousel>
+        </div>
+      </Center>
+      <Center>
+        <div>
+          <Title size="h1" align="center" style={{ padding: 20 }}>TRAINING IS EVERYTHING</Title>
+          <Text fw={500} fz="md">At our core, Gymotive is a training brand for people who work hard and don't believe in excuses. </Text>
         </div>
       </Center>
 
