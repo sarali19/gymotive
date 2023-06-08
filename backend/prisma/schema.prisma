@@ -40,8 +40,8 @@ model Orders {
   id        String    @unique @default(uuid())
   clientId  String
   client    Clients   @relation(fields: [clientId], references: [id])
-  productId String
-  product   Products? @relation(fields: [productId], references: [id], onDelete: NoAction)
+  productId String?
+  product   Products? @relation(fields: [productId], references: [id], onDelete: SetNull)
   createdAt DateTime  @default(now())
   status    String?
   quantity  Int

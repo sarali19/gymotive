@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Tabs, Table, Group, ActionIcon, Button, Modal, Center, Loader, Text, TextInput } from '@mantine/core'
-import { AiFillEdit, AiOutlineClose, AiOutlinePlus, AiOutlineUser } from 'react-icons/ai'
-import { BsFillBox2Fill } from 'react-icons/bs'
-import api from '../api/axios'
-import { useDisclosure } from '@mantine/hooks'
+import React, { useEffect, useState } from "react";
+import { Box, Tabs, Table, Group, ActionIcon, Button, Modal, Center, Loader, Text, TextInput } from "@mantine/core";
+import { AiFillEdit, AiOutlineClose, AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
+import { BsFillBox2Fill } from "react-icons/bs";
+import api from "../api/axios";
+import { useDisclosure } from "@mantine/hooks";
 
 function AdminDashboard() {
   const [orders, setOrders] = useState([]);
@@ -70,11 +70,15 @@ function AdminDashboard() {
         ) : (
           <>
             <Tabs.Panel value="orders" pt="xs">
-              <TextInput value={keyword} onChange={(e) => setKeyword(e.target.value)} placeholder='Search client by name or email' />
+              <TextInput
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                placeholder="Search client by name or email"
+              />
               <Table>
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>OrderId</th>
                     <th>Client</th>
                     <th>ProductId</th>
                     <th>Product</th>
@@ -86,19 +90,21 @@ function AdminDashboard() {
                 </thead>
                 <tbody>
                   {orders
-                    .filter(item => item.client.name.includes(keyword) || item.client.email.includes(keyword))
-                    .map((item) =>
+                    .filter((item) => item.client.name.includes(keyword) || item.client.email.includes(keyword))
+                    .map((item) => (
                       <tr key={item.id}>
                         <td>{item.id}</td>
-                        <td>{item.client.name} ({item.client.email})</td>
-                        <td>{item.productId}</td>
-                        <td>{item.product.title}</td>
+                        <td>
+                          {item.client.name} ({item.client.email})
+                        </td>
+                        <td>{item.productId || "Product no longer available"}</td>
+                        <td>{item.product?.title || "Product no longer available"}</td>
                         <td>{item.status}</td>
                         <td>{item.quantity}</td>
                         <td>{item.total}</td>
                         <td>{item.createdAt}</td>
                       </tr>
-                    )}
+                    ))}
                 </tbody>
               </Table>
             </Tabs.Panel>
