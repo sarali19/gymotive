@@ -33,9 +33,9 @@ const SignUp = ({ isAdmin }) => {
       if (!isAdmin) {
         data = { ...data, address: values.address };
       }
-      await api.post("users/signup", data, { params: { isAdmin: !!isAdmin } });
+      await api.post("users/signup", data, { params: { isAdmin } });
       alert("Account created successfully!");
-      navigate(`/signin${isAdmin ? "/admin" : ""}}`);
+      navigate(`/signin${isAdmin ? "/admin" : ""}`);
     } catch (error) {
       window.alert(error.response.data);
     } finally {
