@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput, Center } from "@mantine/core";
+import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput, Center, Switch } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import api from "../api/axios";
@@ -26,6 +26,7 @@ function CreateProductForm() {
       color: "",
       brand: "",
       price: 0,
+      onSale: false,
       image: null,
     },
     validate: zodResolver(schema),
@@ -96,6 +97,11 @@ function CreateProductForm() {
           precision={2}
           withAsterisk
           {...form.getInputProps("price")}
+        />
+
+        <Switch
+          label="On Sale"
+          {...form.getInputProps("onSale", { type: "checkbox" })}
         />
 
         <FileInput

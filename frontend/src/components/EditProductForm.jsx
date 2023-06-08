@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput, Center } from "@mantine/core";
+import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput, Center, Image } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { z } from "zod";
+import { string, z } from "zod";
 import api from "../api/axios";
 import { brandOptions, categoryOptions, colorOptions } from "../constants";
 import { imageToBase64 } from "../util/imageToBase64";
 import { useParams } from "react-router-dom";
+import { Switch } from '@mantine/core';
 
 const schema = z.object({
   title: z.string().min(2, { message: "Title should have at least 2 letters" }),
-  description: z.string(),
   category: z.string().min(1, "You must specify the category"),
-  color: z.string(),
+  color: z.string().min(1, "You must specify the color"),
   brand: z.string().min(1, "You must specify the brand"),
   price: z.number().refine((value) => value > 0, { message: "Price must be greater than 0" }),
 });
 
+
+
 function EditProductForm() {
   const { productId } = useParams();
-  const [product, setProduct] = useState();
   const [loading, setLoading] = useState(false);
 
   const form = useForm({
@@ -29,6 +30,7 @@ function EditProductForm() {
       color: "",
       brand: "",
       price: 0,
+      onSale: false,
       image: null,
     },
     validate: zodResolver(schema),
@@ -37,7 +39,14 @@ function EditProductForm() {
   const submitProduct = async (values) => {
     setLoading(true);
     try {
-      const image64 = await imageToBase64(values.image);
+      let image64 = null;
+      if (values.image) {
+        if (typeof values.image === "object")
+          image64 = await imageToBase64(values.image);
+        else {
+          image64 = values.image
+        }
+      }
       await api.put(`/products/${[productId]}`, { ...values, image: image64 });
     } catch (error) {
       console.log(error);
@@ -116,6 +125,11 @@ function EditProductForm() {
           {...form.getInputProps("price")}
         />
 
+        <Switch
+          label="On Sale"
+          {...form.getInputProps("onSale", { type: "checkbox" })}
+        />
+
         <FileInput
           placeholder="Upload image"
           label="Product image"
@@ -123,6 +137,7 @@ function EditProductForm() {
           accept="image/png,image/jpeg"
           {...form.getInputProps("image")}
         />
+        {form.values.image && <Image src={form.values.image} />}
 
         <Center>
           <Button type="submit" color="green" radius="md" size="md" mt={20}>
