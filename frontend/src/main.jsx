@@ -10,7 +10,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         globalStyles: (theme) => ({
           body: {
             margin: 0,
-            // fontFamily: "Consolas"
           },
 
           ".link": {
@@ -30,13 +29,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             fontSize: 24,
             textTransform: "uppercase",
             textDecoration: "none",
-            fontFamily: "consolas",
+            fontFamily: "Impact",
           },
 
           ".category-button:hover": {
             background: "none",
             borderRadius: 0,
-            borderBottom: "3px solid white",
+            borderBottom: "3px solid limegreen",
           },
 
           ".main-footer": {
@@ -52,21 +51,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             position: "absolute",
             right: 0.5,
             left: 40,
-            bottom: 170,
+            top: "50%",
           },
           ".hero-title": {
-            fontSize: "3em",
+            fontSize: "4em",
           },
 
           ".shop-button": {
             color: "black",
             background: "white",
-            // fontSize: 28,
-            // textTransform: "uppercase",
-            // textDecoration: "none",
-            // fontFamily: "consolas",
-            // padding: "24px 30px"
           },
+
           ".shop-button:hover": {
             color: "white",
             background: "black",

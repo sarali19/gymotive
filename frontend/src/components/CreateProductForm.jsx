@@ -1,10 +1,23 @@
 import React, { useState } from "react";
-import { Box, Button, NumberInput, Select, Text, TextInput, Textarea, Loader, FileInput, Center, Switch } from "@mantine/core";
+import {
+  Box,
+  Button,
+  NumberInput,
+  Select,
+  Text,
+  TextInput,
+  Textarea,
+  Loader,
+  FileInput,
+  Center,
+  Switch,
+} from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import api from "../api/axios";
 import { brandOptions, categoryOptions, colorOptions } from "../constants";
 import { imageToBase64 } from "../util/imageToBase64";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   title: z.string().min(2, { message: "Title should have at least 2 letters" }),
@@ -17,6 +30,7 @@ const schema = z.object({
 
 function CreateProductForm() {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm({
     initialValues: {
@@ -38,6 +52,7 @@ function CreateProductForm() {
       const image64 = await imageToBase64(values.image);
       values = { ...values, image: image64 };
       await api.post("/products/", values);
+      navigate(-1);
     } catch (error) {
       console.log(error);
     } finally {
@@ -50,7 +65,7 @@ function CreateProductForm() {
   }
 
   return (
-    <Box maw={350} mx="auto">
+    <Box>
       <Text fw={700} fz="xl">
         Create a new product
       </Text>
@@ -99,10 +114,7 @@ function CreateProductForm() {
           {...form.getInputProps("price")}
         />
 
-        <Switch
-          label="On Sale"
-          {...form.getInputProps("onSale", { type: "checkbox" })}
-        />
+        <Switch label="On sale" {...form.getInputProps("onSale", { type: "checkbox" })} my={"1rem"} />
 
         <FileInput
           placeholder="Upload image"

@@ -1,27 +1,27 @@
 export const categoryOptions = [
-    { value: "Men", label: "Men" },
-    { value: "Women", label: "Women" },
-    { value: "Supplements", label: "Supplements" },
-    { value: "Accessories", label: "Accessories" },
+  { value: "Men", label: "Men" },
+  { value: "Women", label: "Women" },
+  { value: "Supplements", label: "Supplements" },
+  { value: "Accessories", label: "Accessories" },
 ];
 
 export const brandOptions = [
-    { value: "adidas", label: "adidas" },
-    { value: "nike", label: "nike" },
-    { value: "sbd", label: "sbd" },
-    { value: "reebok", label: "reebok" },
-    { value: "puma", label: "puma" },
-    { value: "dymatize", label: "dymatize" },
-    { value: "mutant", label: "mutant" },
-    { value: "gold standard", label: "gold standard" },
-]
+  { value: "Adidas", label: "Adidas" },
+  { value: "Nike", label: "Nike" },
+  { value: "Sbd", label: "Sbd" },
+  { value: "Reebok", label: "Reebok" },
+  { value: "Puma", label: "Puma" },
+  { value: "Dymatize", label: "Dymatize" },
+  { value: "Mutant", label: "Mutant" },
+  { value: "Gold Standard", label: "Gold Standard" },
+];
 
 export const colorOptions = [
-    { value: "black", label: "Black" },
-    { value: "white", label: "White" },
-    { value: "red", label: "Red" },
-    { value: "blue", label: "Blue" },
-    { value: "green", label: "Green" },
-    { value: "yellow", label: "Yellow" },
-    { value: "purple", label: "Purple" },
-]
+  { value: "Black", label: "Black" },
+  { value: "White", label: "White" },
+  { value: "Red", label: "Red" },
+  { value: "Blue", label: "Blue" },
+  { value: "Green", label: "Green" },
+  { value: "Yellow", label: "Yellow" },
+  { value: "Purple", label: "Purple" },
+];

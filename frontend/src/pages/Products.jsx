@@ -57,7 +57,7 @@ function Products() {
             <>
               <Box sx={{ marginBottom: 18 }}>
                 <Group position="right">
-                  <SortByPrice sort={sortProducts} />
+                  <Text color="gray">Showing {products.length} items</Text> <SortByPrice sort={sortProducts} />
                 </Group>
               </Box>
               <Grid>

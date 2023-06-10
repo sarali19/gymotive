@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { CgLogOut } from "react-icons/cg";
-import { Box, Group, Image, Menu } from "@mantine/core";
+import { Box, Group, Image, Menu, Text } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import logo from "../images/gymotive-logo.png";
 
@@ -23,16 +23,16 @@ function Navbar() {
           <Image maw={200} src={logo} alt="logo" />
         </Link>
         <Group>
-          <a href="/products?category=Women" className="category-button">
+          <a href="/products?category=Women" className="link category-button">
             Women
           </a>
-          <a href="/products?category=Men" className="category-button">
+          <a href="/products?category=Men" className="link category-button">
             Men
           </a>
-          <a href="/products?category=Accessories" className="category-button">
+          <a href="/products?category=Accessories" className="link category-button">
             Accessories
           </a>
-          <a href="/products?category=Supplements" className="category-button">
+          <a href="/products?category=Supplements" className="link category-button">
             Supplements
           </a>
         </Group>

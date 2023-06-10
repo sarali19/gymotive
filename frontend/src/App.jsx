@@ -14,12 +14,13 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import NotFound from "./pages/NotFound";
 import EditProductForm from "./components/EditProductForm";
+import { Container } from "@mantine/core";
 
 function PageLayout() {
   return (
-    <div style={{ minHeight: "100vh", background: "#ffffff" /* "#ececec" */, padding: 50 }}>
+    <Container size="lg" mt="4rem" mb="10rem" style={{ minHeight: "100vh", background: "" }}>
       <Outlet />
-    </div>
+    </Container>
   );
 }
 
