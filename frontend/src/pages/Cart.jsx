@@ -7,7 +7,6 @@ import {
   Group,
   Image,
   Loader,
-  Navbar,
   Paper,
   Table,
   Text,
@@ -17,12 +16,14 @@ import { useLocalStorage } from "@mantine/hooks";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
 import api from "../api/axios";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const [_cartItems, _setCartItems, _deleteCartItems] = useLocalStorage({ key: "cartItems", defaultValue: [] });
   const [user, setUser] = useLocalStorage({ key: "user" });
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function removeFromCart(id) {
     const updatedCartItems = _cartItems.filter((item) => item.id !== id);
@@ -57,29 +58,7 @@ function Cart() {
   };
 
   const handleCreateOrder = async () => {
-    setLoading(true);
-    try {
-      const data = cartItems.map((item) => ({
-        clientId: item.clientId,
-        productId: item.productId,
-        quantity: item.quantity,
-        total: item.quantity * item.product.price,
-        status: "created",
-      }));
-      await api.post("/orders", data);
-      emptyClientCart(); // empties the cart both in database and in localstorage
-      window.alert("Order created successfully");
-      fetchCart();
-    } catch (error) {
-      window.alert(error.response.data);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const emptyClientCart = async () => {
-    await api.delete(`/carts/${user.id}`);
-    _deleteCartItems();
+    navigate("/cmi/payment");
   };
 
   useEffect(() => {
