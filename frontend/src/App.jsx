@@ -15,6 +15,11 @@ import SignIn from "./pages/SignIn";
 import NotFound from "./pages/NotFound";
 import EditProductForm from "./components/EditProductForm";
 import { Container } from "@mantine/core";
+import CMI from "./pages/CMI";
+
+function AppShell() {
+  return;
+}
 
 function PageLayout() {
   return (
@@ -44,6 +49,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin/admin" element={<SignIn isAdmin />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/cmi/payment" element={<CMI />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
