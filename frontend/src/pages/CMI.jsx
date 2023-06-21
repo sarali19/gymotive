@@ -10,7 +10,7 @@ const thStyle = { background: "#F5F5F5", color: "#F44336", fontWeight: "normal" 
 
 const schema = z.object({
   name: z.string().min(2, { message: "Name invalid" }),
-  cardNumber: z.string().length(16),
+  cardNumber: z.string().length(16, { message: "card number must be 16 characters" }),
   expirationMonth: z.string().min(1, "Month invalid"),
   expirationYear: z.string().min(1, "Year invalid"),
   verificationCode: z.string().length(3, "Verification code invalid"),
@@ -223,7 +223,7 @@ function CMI() {
                     type="submit"
                     color="green"
                     form="paymentForm"
-                    disabled={paymentLoading || !paymentForm.isValid()}
+
                   >
                     ACCEPT
                   </Button>

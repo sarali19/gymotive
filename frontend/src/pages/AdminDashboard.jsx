@@ -182,7 +182,7 @@ function AdminDashboard() {
       </Tabs>
 
       <Modal opened={opened} onClose={close} title="">
-        <Text mb={0}>Are you sure you to delete this item</Text>
+        <Text mb={0}>Are you sure you want to delete this item</Text>
         <Group position="right">
           <Button color="red" onClick={() => handleDeleteProduct(productToDelete)}>
             Delete
